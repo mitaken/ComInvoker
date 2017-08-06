@@ -10,7 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DA619FBF-613E-45BE-94A5-6226E385BF14}"
 	ProjectSection(SolutionItems) = preProject
 		build.bat = build.bat
-		ComInvoker.nuspec = ComInvoker.nuspec
 		nupkg.bat = nupkg.bat
 		README.md = README.md
 	EndProjectSection
