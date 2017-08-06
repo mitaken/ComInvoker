@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>ComInvoker</id>
+    <version>1.0.0</version>
+    <authors>mitaken</authors>
+    <owners>mitaken</owners>
+    <licenseUrl>https://github.com/mitaken/ComInvoker/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/mitaken/ComInvoker</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Invoke COM objects and automatically release com objects</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2017 mitaken</copyright>
+    <tags>COM InteropServices</tags>
+  </metadata>
+</package>
