@@ -62,7 +62,18 @@ namespace ComInvoker
         /// <param name="releaseCount">Release count</param>
         public void Release(int releaseCount = 1)
         {
-            for (int i = 0, c = (releaseCount > comStack.Count ? comStack.Count : releaseCount); i < c; i++)
+            for (int i = 0; i < releaseCount; i++)
+            {
+                InternalRelease(comStack.Pop());
+            }
+        }
+
+        /// <summary>
+        /// Release all COM objects
+        /// </summary>
+        public void ReleaseAll()
+        {
+            while (comStack.Count > 0)
             {
                 InternalRelease(comStack.Pop());
             }
@@ -94,10 +105,7 @@ namespace ComInvoker
             {
                 if (disposing)
                 {
-                    foreach (var com in comStack)
-                    {
-                        InternalRelease(com);
-                    }
+                    ReleaseAll();
                 }
 
                 disposedValue = true;

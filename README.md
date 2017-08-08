@@ -2,6 +2,13 @@
 
 Release com object automatically
 
+## NuGet
+
+[ComInvoker](https://www.nuget.org/packages/ComInvoker/)
+```powershell
+PM> Install-Package ComInvoker
+```
+
 ## Usage
 
 1. Create `ComInvoker.Invoker()` instance with __using__

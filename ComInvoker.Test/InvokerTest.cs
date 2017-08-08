@@ -54,7 +54,7 @@ namespace ComInvoker.Test
                 }
                 Assert.AreEqual(3, invoker.StackCount);
 
-                invoker.Release(3);
+                invoker.ReleaseAll();
 
                 Assert.AreEqual(0, invoker.StackCount);
                 Assert.ThrowsException<InvalidComObjectException>(() => regex.Pattern, "Release faiure");
