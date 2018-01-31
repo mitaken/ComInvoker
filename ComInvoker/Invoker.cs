@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -14,7 +15,7 @@ namespace ComInvoker
         /// <summary>
         /// COM stacker
         /// </summary>
-        private Stack<object> comStack = new Stack<object>();
+        private ConcurrentStack<object> comStack = new ConcurrentStack<object>();
 
         /// <summary>
         /// COM stacked count
@@ -33,6 +34,7 @@ namespace ComInvoker
         /// <summary>
         /// Invoke COM object
         /// </summary>
+        /// <remarks>Thread safe</remarks>
         /// <typeparam name="T">Type of COM</typeparam>
         /// <param name="com">COM object</param>
         /// <returns>Typed COM</returns>
@@ -60,36 +62,45 @@ namespace ComInvoker
         /// Release COM object
         /// </summary>
         /// <param name="releaseCount">Release count</param>
-        public void Release(int releaseCount = 1)
+        public bool[] Release(int releaseCount = 1)
         {
-            for (int i = 0; i < releaseCount; i++)
+            var results = new bool[releaseCount];
+            for (var i = 0; i < releaseCount; i++)
             {
-                InternalRelease(comStack.Pop());
+                var result = false;
+                if (comStack.TryPop(out object com))
+                {
+                    result = InternalRelease(com);
+                }
+                results[i] = result;
             }
+
+            return results;
         }
 
         /// <summary>
         /// Release all COM objects
         /// </summary>
-        public void ReleaseAll()
+        public bool[] ReleaseAll()
         {
-            while (comStack.Count > 0)
-            {
-                InternalRelease(comStack.Pop());
-            }
+            return Release(comStack.Count);
         }
 
         /// <summary>
         /// Internal release method
         /// </summary>
         /// <param name="com">COM object</param>
-        private void InternalRelease(object com)
+        /// <returns>Release result</returns>
+        private bool InternalRelease(object com)
         {
+            var result = false;
             if (com != null && Marshal.IsComObject(com))
             {
-                while (Marshal.FinalReleaseComObject(com) != 0) { }
+                result = Marshal.FinalReleaseComObject(com) == 0;
                 com = null;
             }
+
+            return result;
         }
 
         #region IDisposable Support

@@ -54,7 +54,7 @@ namespace ComInvoker.Test
                 }
                 Assert.AreEqual(3, invoker.StackCount);
 
-                invoker.ReleaseAll();
+                CollectionAssert.DoesNotContain(invoker.ReleaseAll(), false);
 
                 Assert.AreEqual(0, invoker.StackCount);
                 Assert.ThrowsException<InvalidComObjectException>(() => regex.Pattern, "Release faiure");
@@ -103,7 +103,7 @@ namespace ComInvoker.Test
                 while (ie.Busy || ie.ReadyState != READYSTATE_COMPLETE) { }
                 ie.Quit();
 
-                invoker.Release();
+                CollectionAssert.DoesNotContain(invoker.Release(), false);
 
                 Assert.AreEqual(0, invoker.StackCount);
                 Assert.ThrowsException<InvalidComObjectException>(() => ie.Pattern, "Release faiure");
