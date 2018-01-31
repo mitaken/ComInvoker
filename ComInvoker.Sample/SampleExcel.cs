@@ -1,4 +1,4 @@
-﻿using Microsoft.Office.Interop.Excel;
+﻿using System;
 
 namespace ComInvoker.Sample
 {
@@ -7,14 +7,17 @@ namespace ComInvoker.Sample
         /// <summary>
         /// Excel instance
         /// </summary>
-        private Application excel;
+        private dynamic excel;
 
         /// <summary>
         /// Create excel instance
         /// </summary>
         internal SampleExcel()
         {
-            excel = Invoke<Application>(new Application());
+            var type = Type.GetTypeFromProgID("Excel.Application");
+            if (type == null) throw new TypeLoadException("Excel does not installed");
+
+            excel = Invoke<dynamic>(Activator.CreateInstance(type));//Application
             excel.Visible = true;
         }
 
@@ -22,18 +25,17 @@ namespace ComInvoker.Sample
         internal void Write1To100()
         {
             //Get Workbooks
-            var workbooks = Invoke<Workbooks>(excel.Workbooks);
+            var workbooks = Invoke<dynamic>(excel.Workbooks);//Workbooks
             //Add Workbook
-            var workbook = Invoke<Workbook>(workbooks.Add());
+            var workbook = Invoke<dynamic>(workbooks.Add());//Workbook
             //Get Worksheets
-            var worksheets = InvokeEnumurator<Worksheet>(workbook.Sheets);
+            var worksheets = InvokeEnumurator<dynamic>(workbook.Sheets);//Worksheet
             foreach (var worksheet in worksheets)
             {
-                var cells = Invoke<Range>(worksheet.Cells);
+                var cells = Invoke<dynamic>(worksheet.Cells);//Range
                 for (var i = 1; i < 1000; i++)
                 {
-                    //Use real type for intellisense when return dynamic
-                    Range cell = Invoke<Range>(cells[i, 1]);
+                    dynamic cell = Invoke<dynamic>(cells[i, 1]);//Range
                     cell.Value = i;
                 }
             }
