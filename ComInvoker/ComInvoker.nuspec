@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/mitaken/ComInvoker</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Invoke COM objects and automatically release com objects</description>
-    <releaseNotes>Add ReleaseAll() method</releaseNotes>
+    <releaseNotes>Make Invoke() method to thread safe</releaseNotes>
     <copyright>Copyright 2017 mitaken</copyright>
     <tags>COM Interop</tags>
   </metadata>
