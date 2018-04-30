@@ -2,6 +2,9 @@
 
 Release com object automatically
 
+[![Build status](https://ci.appveyor.com/api/projects/status/cvt76spkwkms0ytg?svg=true)](https://ci.appveyor.com/project/mitaken/cominvoker)
+
+
 ## NuGet
 
 [ComInvoker](https://www.nuget.org/packages/ComInvoker/)

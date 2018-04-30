@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComInvoker.Test", "ComInvok
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{DA619FBF-613E-45BE-94A5-6226E385BF14}"
 	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
 		build.bat = build.bat
 		nupkg.bat = nupkg.bat
 		README.md = README.md
@@ -37,5 +38,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB031A39-48A8-464C-8CFB-FBAA1C3C2ECB}
 	EndGlobalSection
 EndGlobal

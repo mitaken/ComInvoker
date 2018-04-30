@@ -1,6 +1,6 @@
-#---------------------------------#
-#    environment configuration    #
-#---------------------------------#
-
-# Build worker image (VM template)
+version: 1.0.{build}
 image: Visual Studio 2017
+install:
+- cmd: nuget restore
+build:
+  verbosity: minimal
