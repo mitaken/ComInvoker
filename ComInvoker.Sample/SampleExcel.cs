@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ComInvoker.Sample
+﻿namespace ComInvoker.Sample
 {
     internal class SampleExcel : Invoker
     {
@@ -14,10 +12,7 @@ namespace ComInvoker.Sample
         /// </summary>
         internal SampleExcel()
         {
-            var type = Type.GetTypeFromProgID("Excel.Application");
-            if (type == null) throw new TypeLoadException("Excel does not installed");
-
-            excel = Invoke<dynamic>(Activator.CreateInstance(type));//Application
+            excel = InvokeFromProgID("Excel.Application");//Application
             excel.Visible = true;
         }
 
@@ -25,17 +20,17 @@ namespace ComInvoker.Sample
         internal void Write1To100()
         {
             //Get Workbooks
-            var workbooks = Invoke<dynamic>(excel.Workbooks);//Workbooks
+            var workbooks = Invoke(excel.Workbooks);//Workbooks
             //Add Workbook
-            var workbook = Invoke<dynamic>(workbooks.Add());//Workbook
+            var workbook = Invoke(workbooks.Add());//Workbook
             //Get Worksheets
-            var worksheets = InvokeEnumurator<dynamic>(workbook.Sheets);//Worksheet
+            var worksheets = InvokeEnumurator(workbook.Worksheets);//IEnumerable<Worksheet>
             foreach (var worksheet in worksheets)
             {
-                var cells = Invoke<dynamic>(worksheet.Cells);//Range
+                var cells = Invoke(worksheet.Cells);//Range
                 for (var i = 1; i < 1000; i++)
                 {
-                    dynamic cell = Invoke<dynamic>(cells[i, 1]);//Range
+                    dynamic cell = Invoke(cells[i, 1]);//Range
                     cell.Value = i;
                 }
             }

@@ -2,15 +2,15 @@
 <package >
   <metadata>
     <id>ComInvoker</id>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <authors>mitaken</authors>
     <owners>mitaken</owners>
     <licenseUrl>https://github.com/mitaken/ComInvoker/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/mitaken/ComInvoker</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Invoke COM objects and automatically release com objects</description>
-    <releaseNotes>Make Invoke() method to thread safe</releaseNotes>
-    <copyright>Copyright 2017 mitaken</copyright>
+    <releaseNotes>Add InvokeFromProgID(progID) and late binding help methods.</releaseNotes>
+    <copyright>Copyright 2019 mitaken</copyright>
     <tags>COM Interop</tags>
   </metadata>
 </package>

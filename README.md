@@ -24,11 +24,10 @@ See ComInvoker.Sample project
 ### Auto release
 
 ```csharp
-var type = Type.GetTypeFromProgID("InternetExplorer.Application");
 using (var invoker = new ComInvoker.Invoker())
 {
     //Create IE Object
-    var ie = invoker.Invoke<dynamic>(Activator.CreateInstance(type));
+    var ie = invoker.InvokeFromProgID("InternetExplorer.Application");
     //Show IE Window
     ie.Visible = true;
     //Open about:blank
@@ -45,7 +44,7 @@ using (var invoker = new ComInvoker.Invoker())
 using (var invoker = new ComInvoker.Invoker())
 {
     //Create IE Object
-    var ie = invoker.Invoke<dynamic>(Activator.CreateInstance(type));
+    var ie = invoker.InvokeFromProgID("InternetExplorer.Application");
     //Show IE Window
     ie.Visible = true;
     //Open about:blank

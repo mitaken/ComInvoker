@@ -32,7 +32,28 @@ namespace ComInvoker
         { }
 
         /// <summary>
-        /// Invoke COM object
+        /// Invoke COM object from ProgID (early binding)
+        /// </summary>
+        /// <typeparam name="T">Type of COM</typeparam>
+        /// <param name="progID">Programmatic Identifier</param>
+        /// <returns>Typed COM</returns>
+        public T InvokeFromProgID<T>(string progID)
+        {
+            return Invoke<T>(Activator.CreateInstance(Type.GetTypeFromProgID(progID, true)));
+        }
+
+        /// <summary>
+        /// Invoke COM object from ProgID (late binding)
+        /// </summary>
+        /// <param name="progID">Programmatic Identifier</param>
+        /// <returns>Dynamic COM</returns>
+        public dynamic InvokeFromProgID(string progID)
+        {
+            return InvokeFromProgID<dynamic>(progID);
+        }
+
+        /// <summary>
+        /// Invoke COM object (early binding)
         /// </summary>
         /// <remarks>Thread safe</remarks>
         /// <typeparam name="T">Type of COM</typeparam>
@@ -46,7 +67,17 @@ namespace ComInvoker
         }
 
         /// <summary>
-        /// Invoke Enumurator
+        /// Invoke COM object (late binding)
+        /// </summary>
+        /// <param name="com">Type of COM</param>
+        /// <returns>Dynamic COM</returns>
+        public dynamic Invoke(object com)
+        {
+            return Invoke<dynamic>(com);
+        }
+
+        /// <summary>
+        /// Invoke Enumurator (early binding)
         /// </summary>
         /// <typeparam name="T">Type of COM</typeparam>
         /// <param name="com">COM object</param>
@@ -59,6 +90,16 @@ namespace ComInvoker
         }
 
         /// <summary>
+        /// Invoke Enumurator (late binding)
+        /// </summary>
+        /// <param name="com">COM object</param>
+        /// <returns>Dynamic COM</returns>
+        public IEnumerable<dynamic> InvokeEnumurator(IEnumerable com)
+        {
+            return InvokeEnumurator<dynamic>(com);
+        }
+
+        /// <summary>
         /// Release COM object
         /// </summary>
         /// <param name="releaseCount">Release count</param>
@@ -68,7 +109,7 @@ namespace ComInvoker
             for (var i = 0; i < releaseCount; i++)
             {
                 var result = false;
-                if (comStack.TryPop(out object com))
+                if (comStack.TryPop(out var com))
                 {
                     result = InternalRelease(com);
                 }
